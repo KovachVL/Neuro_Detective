@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex-grow flex items-center justify-center">
+    <div class="bg-secondary p-8 rounded-xl shadow-2xl w-full max-w-md border border-gray-700">
+        <h2 class="text-3xl font-bold mb-6 text-center text-white">Вход в систему</h2>
+        
+        {% if error %}
+        <div class="bg-red-500/20 border border-red-500 text-red-200 px-4 py-3 rounded mb-4 text-sm text-center">
+            {{ error }}
+        </div>
+        {% endif %}
+        
+        {% if success %}
+        <div class="bg-green-500/20 border border-green-500 text-green-200 px-4 py-3 rounded mb-4 text-sm text-center">
+            {{ success }}
+        </div>
+        {% endif %}
+
+        <div class="mb-4">
+            <div class="flex justify-center space-x-4 mb-6">
+                <button id="tab-login" class="text-primary border-b-2 border-primary pb-1 font-semibold transition" onclick="switchTab('login')">Войти</button>
+                <button id="tab-register" class="text-gray-400 pb-1 font-semibold hover:text-white transition" onclick="switchTab('register')">Регистрация</button>
+            </div>
+        </div>
+
+        <form id="form-login" action="/login" method="POST" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium mb-1 text-gray-300">Логин</label>
+                <input type="text" name="username" required class="w-full bg-dark border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-primary transition">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1 text-gray-300">Пароль</label>
+                <input type="password" name="password" required class="w-full bg-dark border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-primary transition">
+            </div>
+            <button type="submit" class="w-full bg-primary hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition mt-4">
+                Войти
+            </button>
+        </form>
+
+        <form id="form-register" action="/register" method="POST" class="space-y-4 hidden">
+            <div>
+                <label class="block text-sm font-medium mb-1 text-gray-300">Придумайте логин</label>
+                <input type="text" name="username" required class="w-full bg-dark border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-primary transition">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1 text-gray-300">Придумайте пароль</label>
+                <input type="password" name="password" required class="w-full bg-dark border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-primary transition">
+            </div>
+            <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition mt-4">
+                Зарегистрироваться
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function switchTab(tab) {
+        if (tab === 'login') {
+            document.getElementById('form-login').classList.remove('hidden');
+            document.getElementById('form-register').classList.add('hidden');
+            document.getElementById('tab-login').classList.add('text-primary', 'border-b-2', 'border-primary');
+            document.getElementById('tab-login').classList.remove('text-gray-400');
+            document.getElementById('tab-register').classList.remove('text-primary', 'border-b-2', 'border-primary');
+            document.getElementById('tab-register').classList.add('text-gray-400');
+        } else {
+            document.getElementById('form-register').classList.remove('hidden');
+            document.getElementById('form-login').classList.add('hidden');
+            document.getElementById('tab-register').classList.add('text-primary', 'border-b-2', 'border-primary');
+            document.getElementById('tab-register').classList.remove('text-gray-400');
+            document.getElementById('tab-login').classList.remove('text-primary', 'border-b-2', 'border-primary');
+            document.getElementById('tab-login').classList.add('text-gray-400');
+        }
+    }
+</script>
+{% endblock %}

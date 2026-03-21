@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Терминал Бункера</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#121212',
+                        darker: '#0a0a0a',
+                        primary: '#3b82f6',
+                        secondary: '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #121212; color: #e5e7eb; }
+        .glass { background: rgba(31, 41, 55, 0.7); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased">
+    <nav class="bg-darker border-b border-gray-800 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-xl font-bold text-primary">Терминал Бункера</a>
+            <div>
+                {% if user %}
+                    <span class="mr-4 text-gray-400">Привет, {{ user.username }}</span>
+                    {% if user.is_admin %}
+                        <span class="mr-4 text-xs bg-red-600 px-2 py-1 rounded">Админ</span>
+                    {% endif %}
+                    <a href="/logout" class="text-sm hover:text-white transition">Выйти</a>
+                {% else %}
+                    <a href="/" class="text-sm hover:text-white transition">Вход</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto p-4 flex flex-col">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-darker border-t border-gray-800 p-4 text-center text-sm text-gray-500">
+        &copy; 2026 Терминал Бункера. Все права защищены.
+    </footer>
+</body>
+</html>
