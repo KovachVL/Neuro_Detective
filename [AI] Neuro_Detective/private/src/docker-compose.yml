@@ -6,5 +6,27 @@ services:
     env_file:
       - .env
     environment:
-      - LLM_API_BASE=http://host.docker.internal:8000/v1
+      - LLM_API_BASE=http://vllm:8000/v1
+    depends_on:
+      - vllm
     restart: unless-stopped
+
+  vllm:
+    image: vllm/vllm-openai:latest
+    command: --model IlyaGusev/saiga_llama3_8b --dtype auto --api-key empty --max-model-len 4096 --gpu-memory-utilization 0.9
+    ports:
+      - "8000:8000"
+    volumes:
+      - huggingface_cache:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    ipc: host
+    restart: unless-stopped
+
+volumes:
+  huggingface_cache:
