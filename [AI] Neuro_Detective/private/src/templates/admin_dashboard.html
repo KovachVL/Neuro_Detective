@@ -2,11 +2,11 @@
 
 {% block content %}
 <div class="flex-grow flex flex-col">
-    <div class="bg-secondary p-8 rounded-xl shadow-2xl border border-cyan-900 w-full">
+    <div class="bg-secondary p-8 rounded-xl shadow-2xl border border-gray-700 w-full">
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-bold text-white flex items-center">
-                <span class="bg-pink-600 text-xs px-2 py-1 rounded mr-3 uppercase">Admin</span>
-                Панель модерации
+                <span class="bg-blue-600 text-xs px-2 py-1 rounded mr-3 uppercase">Admin</span>
+                Панель управления
             </h2>
             <div class="text-sm text-gray-400">
                 Всего пользователей: {{ user_chats|length }}
@@ -16,7 +16,7 @@
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead>
-                    <tr class="border-b border-cyan-900 text-cyan-400 bg-cyan-950/30">
+                    <tr class="border-b border-gray-700 text-gray-400 bg-gray-800/50">
                         <th class="py-3 px-4 rounded-tl-lg">Пользователь</th>
                         <th class="py-3 px-4">ID Чата</th>
                         <th class="py-3 px-4">Сообщений</th>
@@ -33,7 +33,7 @@
                         </td>
                         <td class="py-4 px-4">
                             <a href="/proverk/chat/{{ item.username }}/{{ item.chat_id }}" 
-                               class="bg-cyan-900 hover:bg-cyan-700 text-cyan-100 px-4 py-2 rounded text-sm transition shadow-lg border border-cyan-700">
+                               class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded text-sm transition shadow-lg">
                                 Проверить чат
                             </a>
                         </td>
